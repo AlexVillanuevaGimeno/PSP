@@ -3,29 +3,21 @@
 public class Main {
     public static void main(String[] args) {
 
-        Thread hiloA = new Thread(new HiloX("A"));
-        Thread hiloB = new Thread(new HiloX("B"));
-        Thread hiloC = new Thread(new HiloX("C"));
-
+        HiloX hiloA = new HiloX("A");
+        HiloX hiloB = new HiloX("B");
+        HiloX hiloC = new HiloX("C");
+        hiloA.setThread(hiloB);
+        hiloB.setThread(hiloC);
+        hiloC.setThread(hiloA);
+//        hiloA.setPriority(Thread.MAX_PRIORITY);
+//        hiloB.setPriority(Thread.NORM_PRIORITY);
+//        hiloC.setPriority(Thread.MIN_PRIORITY);
         hiloA.start();
         hiloB.start();
         hiloC.start();
 
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
 
-        hiloA.interrupt();
 
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        hiloA.interrupt();
 
 
         System.out.println("Soy el main. Adios mundo");

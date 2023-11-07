@@ -2,24 +2,20 @@
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
+        ThreadX threadA = new ThreadX('A');
+        ThreadX threadB = new ThreadX('B');
+        ThreadX threadC = new ThreadX('C');
 
-        HiloX hiloA = new HiloX("A");
-        HiloX hiloB = new HiloX("B");
-        HiloX hiloC = new HiloX("C");
-        hiloA.setThread(hiloB);
-        hiloB.setThread(hiloC);
-        hiloC.setThread(hiloA);
-//        hiloA.setPriority(Thread.MAX_PRIORITY);
-//        hiloB.setPriority(Thread.NORM_PRIORITY);
-//        hiloC.setPriority(Thread.MIN_PRIORITY);
-        hiloA.start();
-        hiloB.start();
-        hiloC.start();
+        threadA.setNextThread(threadB);
+        threadB.setNextThread(threadC);
+        threadC.setNextThread(threadA);
 
+        ThreadX.setCurrentThread(threadA);
+        threadA.start();
+        threadB.start();
+        threadC.start();
 
 
-
-
-        System.out.println("Soy el main. Adios mundo");
-        }
+        System.out.println("I'm the main class");
     }
+}

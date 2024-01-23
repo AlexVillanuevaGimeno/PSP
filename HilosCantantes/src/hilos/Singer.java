@@ -9,17 +9,17 @@ public class Singer extends Thread {
 
     private ArrayList<Singer> singers;
     private Song song;
-    private int estrofasToSing;
-    private static int estrofasToDistribute;
+    private int estrofasParaCantar;
+    private static int estrofasDistribuidas;
     private static int contadorEstrofas = 0;
 
 
-    public int getEstrofasToSing() {
-        return estrofasToSing;
+    public int getestrofasParaCantar() {
+        return estrofasParaCantar;
     }
 
-    public void setEstrofasToSing(int estrofasToSing) {
-        this.estrofasToSing = estrofasToSing;
+    public void setestrofasParaCantar(int estrofasParaCantar) {
+        this.estrofasParaCantar = estrofasParaCantar;
     }
 
     public Singer(int idSinger) {
@@ -52,21 +52,21 @@ public class Singer extends Thread {
     @Override
     public synchronized void run() {
         if (singers.size() < song.getEstrofas().size()) {
-            estrofasToSing = song.getEstrofas().size() / singers.size();
-            estrofasToDistribute = song.getEstrofas().size() % singers.size();
+            estrofasParaCantar = song.getEstrofas().size() / singers.size();
+            estrofasDistribuidas = song.getEstrofas().size() % singers.size();
 
         } else {
-            estrofasToSing = song.getEstrofas().size() / song.getEstrofas().size();
-            estrofasToDistribute = 0;
+            estrofasParaCantar = song.getEstrofas().size() / song.getEstrofas().size();
+            estrofasDistribuidas = 0;
         }
 
-        for (int i = 0; i < estrofasToDistribute; i++) {
-            singers.get(i).setEstrofasToSing(singers.get(i).getEstrofasToSing() + 1);
+        for (int i = 0; i < estrofasDistribuidas; i++) {
+            singers.get(i).setestrofasParaCantar(singers.get(i).getestrofasParaCantar() + 1);
         }
 
-        System.out.println("Estrofas que sobran= " + estrofasToDistribute);
+        System.out.println("Estrofas que sobran= " + estrofasDistribuidas);
 
-        for (int i = 0; i < getEstrofasToSing(); i++) {
+        for (int i = 0; i < getestrofasParaCantar(); i++) {
             if (getIdSinger() == 0 && contadorEstrofas == 0) {
                 System.out.println("Cantante: " + this.getIdSinger() + ", esta cantando la  estrofa:" +
                         (contadorEstrofas + 1) + ", " + song.getEstrofas().get(contadorEstrofas));
@@ -81,7 +81,7 @@ public class Singer extends Thread {
             }
 
             try {
-                wait(1000);
+                join(1000);
             } catch (InterruptedException e) {
                 if (getIdSinger() >= song.getEstrofas().size()) {
                     for (Singer singer : singers) {
@@ -109,8 +109,8 @@ public class Singer extends Thread {
                 "idSinger=" + idSinger +
                 ", singersSize=" + singers.size() +
                 ", songTitle=" + song.getTitle() +
-                ", estrofasToSing=" + estrofasToSing +
-                ", estrofasToDistribute=" + estrofasToDistribute +
+                ", estrofasParaCantar=" + estrofasParaCantar +
+                ", estrofasDistribuidas=" + estrofasDistribuidas +
                 '}';
     }
 }

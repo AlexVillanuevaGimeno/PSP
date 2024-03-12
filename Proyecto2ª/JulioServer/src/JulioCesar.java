@@ -25,20 +25,24 @@ public class JulioCesar {
         while(true){
             try (ServerSocket server = new ServerSocket(puerto)) {
                 System.out.println("Julio Cesar escuchando en el puerto " + puerto);
+                for (int i = 0; i < 4; i++) {
+                    Socket client = server.accept();
+                    System.out.println("Orden dada a centurión.");
 
-                Socket client = server.accept();
-                System.out.println("Orden dada a centurión.");
-
-                OutputStream outputStream = client.getOutputStream();
-                InputStream inputStream = client.getInputStream();
-                DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
-                DataInputStream dataInputStream = new DataInputStream(inputStream);
-                String[] orden = getOrden();
-                String tipoOrden = orden[0];
-                String mensajeOrden = orden[1];
-                String ordenCifrada = cifrarMensaje(mensajeOrden);
-                dataOutputStream.writeUTF("TIPO DE ORDEN: " + tipoOrden);
-                dataOutputStream.writeUTF( "Mensaje: " + ordenCifrada);
+                    OutputStream outputStream = client.getOutputStream();
+                    InputStream inputStream = client.getInputStream();
+                    DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
+                    DataInputStream dataInputStream = new DataInputStream(inputStream);
+                    for (int j = 0; j < 5; j++) {
+                        String[] orden = getOrden();
+                        String tipoOrden = orden[0];
+                        String mensajeOrden = orden[1];
+                        String ordenCifrada = cifrarMensaje(mensajeOrden);
+                        dataOutputStream.writeUTF(tipoOrden);
+                        dataOutputStream.writeUTF(ordenCifrada);
+                    }
+                    dataOutputStream.writeUTF("ORDENES DADAS AL CENTURION");
+                }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

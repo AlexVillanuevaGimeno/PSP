@@ -26,7 +26,7 @@ public class Client {
             String mensaje = flujo.readUTF();
 
             // Imprimir el mensaje junto con el ID del cliente
-            System.out.println("Cliente ID: " + obtenerClienteId() + " - Mensaje del servidor: " + mensaje);
+            System.out.println("Cliente ID: " + 2 + " - Mensaje del servidor: " + mensaje);
 
             // Cierra la conexión con el servidor
             skCliente.close();

@@ -17,7 +17,7 @@ public class Server {
                 Socket skCliente = serverSocket.accept();
 
                 // Crear un nuevo hilo para atender al cliente y pasar el socket al constructor
-                Thread clienteThread = new Thread(new ClienteHandler(skCliente, 1));
+                Thread clienteThread = new Thread(new ClienteHandler(skCliente, skCliente.getPort()));
                 clienteThread.start();
             }
         } catch (IOException e) {

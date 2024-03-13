@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Centurion/Centurion.iml" filepath="$PROJECT_DIR$/Centurion/Centurion.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ColtaTrabajoFinalPSP.iml" filepath="$PROJECT_DIR$/.idea/ColtaTrabajoFinalPSP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JulioCesar/JulioCesar.iml" filepath="$PROJECT_DIR$/JulioCesar/JulioCesar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Legionario/Legionario.iml" filepath="$PROJECT_DIR$/Legionario/Legionario.iml" />
+    </modules>
+  </component>
+</project>

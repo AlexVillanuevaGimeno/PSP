@@ -9,36 +9,43 @@ public class Cliente {
         PrintWriter salida = new PrintWriter(socket.getOutputStream(), true); // Para enviar mensajes al servidor
         BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in)); // Para recibir entrada del usuario desde la consola
         Random random = new Random(); // Para generar valores aleatorios
-//        FilaDeNiños filaDeNiños = new FilaDeNiños();
+
         try {
             while (true) {
-//                for (Niño niño: filaDeNiños.getFila()) { //for each para recorrer la fila?
-//                }
                 // Generar un nombre de niño aleatorio
                 String nombreNiño = generarNombreNiño();
 
                 // Enviar mensaje al servidor para poner al niño en la fila
                 salida.println("ponersefila:" + nombreNiño);
+
                 // Esperar 3 segundos antes de enviar el siguiente mensaje
                 Thread.sleep(3000);
 
                 // Enviar mensaje al servidor para que el niño suba
                 salida.println("subir:" + nombreNiño);
+
+                // Esperar 3 segundos antes de enviar el siguiente mensaje
                 Thread.sleep(3000);
 
                 // Enviar mensaje al servidor para que el niño baje
                 salida.println("bajar:" + nombreNiño);
+
+                // Esperar 3 segundos antes de enviar el siguiente mensaje
                 Thread.sleep(3000);
 
-                // Decidir aleatoriamente si el niño dará vuelta o no (prob 50%)
+                // Decidir aleatoriamente si el niño dará vuelta o no
                 if (debeDarVueltaAleatoria()) {
-                    // Enviar mensaje al servidor para que el niño de vuelta
+                    // Enviar mensaje al servidor para que el niño dé vuelta
                     salida.println("darvuelta:" + nombreNiño);
+
+                    // Esperar 3 segundos antes de enviar el siguiente mensaje
                     Thread.sleep(3000);
 
                     // Enviar mensaje adicional al servidor para que el niño se vuelva a poner en la fila
                     salida.println("ponersefila:" + nombreNiño);
                 }
+
+                // Esperar 3 segundos antes de enviar el siguiente mensaje
                 Thread.sleep(3000);
             }
         } catch (InterruptedException e) {

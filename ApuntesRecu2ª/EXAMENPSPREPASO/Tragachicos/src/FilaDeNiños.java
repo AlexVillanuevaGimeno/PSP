@@ -16,14 +16,8 @@ public class FilaDeNiños {
         fila.add(niño);
     }
 
-    public synchronized Niño sacarNiño(String nombre) {
-        for (Niño niño: fila) {
-            if (niño.getNombre().equals(nombre)){
-                fila.remove(niño);
-                return niño;
-            }
-        }
-        return null;
+    public synchronized Niño sacarNiño() {
+        return fila.poll();
     }
 
     public synchronized void darVueltaNiño(Niño niño) {

@@ -17,7 +17,8 @@ public class Servidor {
             Thread clienteThread = new Thread(new ClienteHandler(cliente));
             clienteThread.start();
 
-//            mostrarFilaConstantemente();
+            // Mostrar la fila constantemente
+            mostrarFilaConstantemente();
         }
     }
 
@@ -36,11 +37,11 @@ public class Servidor {
         public void run() {
             try {
                 String mensaje;
-                while ((mensaje = entrada.readLine()) != null) { // Leo acciones de los niños
-//                    System.out.println("Mensaje recibido: " + mensaje);
+                while ((mensaje = entrada.readLine()) != null) { // Leer mensajes del cliente
+                    System.out.println("Mensaje recibido: " + mensaje);
                     String[] partesMensaje = mensaje.split(":");
-                    String accion = partesMensaje[0]; // sube,baja,davuelta
-                    String nombreNiño = partesMensaje[1]; // Nombre del niño
+                    String accion = partesMensaje[0]; // Acción solicitada por el cliente
+                    String nombreNiño = partesMensaje[1]; // Nombre del niño involucrado en la acción
 
                     switch (accion) {
                         case "subir":
@@ -52,7 +53,7 @@ public class Servidor {
                             }
                             break;
                         case "bajar":
-                            Niño niñoABajar = fila.sacarNiño(nombreNiño);
+                            Niño niñoABajar = fila.sacarNiño();
                             if (niñoABajar != null) {
                                 System.out.println(nombreNiño + " ha bajado del Tragachicos.");
                             } else {
@@ -74,7 +75,7 @@ public class Servidor {
                             fila.agregarNiño(new Niño(nombreNiño)); // Agregar un nuevo niño a la fila
                             System.out.println(nombreNiño + " se ha puesto en la fila.");
                             break;
-
+                        // Agregar más casos según las acciones del enunciado
                     }
                 }
             } catch (IOException e) {
@@ -110,14 +111,14 @@ public class Servidor {
     }
 
     // Mostrar la fila constantemente en un hilo separado
-//    private static void mostrarFilaConstantemente() {
-//        while (true) {
-//            System.out.println(fila.mostrarFila()); // Mostrar la fila en la consola
-//            try {
-//                Thread.sleep(5000); // Mostrar la fila cada 5 segundos
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
+    private static void mostrarFilaConstantemente() {
+        while (true) {
+            System.out.println(fila.mostrarFila()); // Mostrar la fila en la consola
+            try {
+                Thread.sleep(5000); // Mostrar la fila cada 5 segundos
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
